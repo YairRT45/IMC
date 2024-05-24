@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMCApp.Views.PacientePage"
+             Title="{Binding TituloPagina}">
+    <VerticalStackLayout Padding="15">
+
+        <ActivityIndicator IsVisible="{Binding LoadingEsVisible}"
+                           IsRunning="{Binding LoadingEsVisible}"
+                           Color="Blue"
+                           HeightRequest="30"/>
+
+        <Label Text="Nombre"/>
+        <Entry Text="{Binding PacienteDto.Nombre}" Margin="0,0,0,10"/>
+        <Label Text="{Binding ErrorNombre}" TextColor="Red"/>
+
+        <Label Text="Apellido"/>
+        <Entry Text="{Binding PacienteDto.Apellido}" Margin="0,0,0,10"/>
+        <Label Text="{Binding ErrorApellido}" TextColor="Red"/>
+
+        <Label Text="Edad"/>
+        <Entry Text="{Binding PacienteDto.Edad}" Keyboard="Numeric" Margin="0,0,0,10"/>
+        <Label Text="{Binding ErrorEdad}" TextColor="Red"/>
+
+        <Label Text="Peso"/>
+        <Entry Text="{Binding PacienteDto.Peso}" Keyboard="Numeric" Margin="0,0,0,10"/>
+        <Label Text="{Binding ErrorPeso}" TextColor="Red"/>
+
+        <Label Text="Estatura"/>
+        <Entry Text="{Binding PacienteDto.Estatura}" Keyboard="Numeric" Margin="0,0,0,10"/>
+        <Label Text="{Binding ErrorEstatura}" TextColor="Red"/>
+
+        <Label Text="Sexo"/>
+        <Picker Title="Seleccione el genero"
+                SelectedItem="{Binding PacienteDto.Sexo}"
+                Margin="0,0,0,10">
+            <Picker.Items>
+                <x:String>Masculino</x:String>
+                <x:String>Femenino</x:String>
+            </Picker.Items>
+        </Picker>
+        <Label Text="{Binding ErrorSexo}" TextColor="Red"/>
+
+        <Label Text="Nivel de actividad física"/>
+        <Picker Title="Seleccione la frecuencia de actividad física"
+                SelectedItem="{Binding PacienteDto.ActividadFisica}"
+                Margin="0,0,0,10">
+            <Picker.Items>
+                <x:String>Rara vez</x:String>
+                <x:String>1 a 3 días por semana</x:String>
+                <x:String>3 a 5 días por semana</x:String>
+                <x:String>6 a 7 días por semana</x:String>
+                <x:String>Diario</x:String>
+            </Picker.Items>
+        </Picker>
+        <Label Text="{Binding ErrorActFisica}" TextColor="Red"/>
+
+        <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="Green"/>
+    </VerticalStackLayout>
+</ContentPage>

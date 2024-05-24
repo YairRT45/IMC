@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:IMCApp.DTOs"
+             x:Class="IMCApp.MainPage">
+
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="15" Margin="15">
+
+        <Button Grid.Row="0" Text="Nuevo Paciente" Command="{Binding CrearCommand}" BackgroundColor="DarkBlue"/>
+        <Label Grid.Row="1" Text="Lista de pacientes" FontSize="Subtitle"/>
+
+        <ScrollView Grid.Row="2">
+
+            <CollectionView ItemsSource="{Binding ListaPaciente}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PacienteDTO">
+                        <Border Padding="10,5" HorizontalOptions="FillAndExpand">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto,*">
+
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalOptions="Start">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Nombre" />
+                                            <Binding Path="Apellido" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" HorizontalOptions="Start">
+                                    <Label.Text>
+                                        <Binding Path="Edad" StringFormat="{}{0} años" />
+                                    </Label.Text>
+                                </Label>
+
+                                <Label Grid.Row="2" Grid.Column="0" Text="Ver paciente" TextColor="Blue" HorizontalOptions="Start">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command ="{Binding BindingContext.VerPacienteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Grid.Row="2" Grid.Column="1" Text="Editar" TextColor="Blue" HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command ="{Binding BindingContext.EditarCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Grid.Row="2" Grid.Column="2" Text="Eliminar" TextColor="Red" HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command ="{Binding BindingContext.EliminarCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
